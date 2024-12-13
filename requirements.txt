@@ -3,3 +3,6 @@ pymupdf
 google-generativeai
 python-dotenv
 langchain-google-genai
+langchain_core
+streamlit
+requests

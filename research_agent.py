@@ -1,6 +1,5 @@
 import re
 import os
-import asyncio
 import requests
 import logging
 import google.generativeai as genai
@@ -32,7 +31,7 @@ llm = ChatGoogleGenerativeAI(
 )
 
 
-def perform_search(query, n_results=10, pause=2.0):
+def perform_search(query, n_results=20, pause=2.0):
     """
     Perform Google Search and get urls
     :param query:
@@ -115,8 +114,8 @@ def process_documents(documents):
         logging.info(doc.page_content)
 
 
-async def main():
-    user_input = input("Ask: ")
+async def research(user_input):
+    # user_input = input("Ask: ")
     search_urls = perform_search(user_input)
     normal_urls, arxiv_urls = extract_urls(search_urls)
 
@@ -133,14 +132,15 @@ async def main():
         ]
     )
     chain = prompt | llm
-    res = chain.invoke(
+    res = await chain.ainvoke(
         {
             "context": documents,
             "input": user_input,
         }
     )
-    print(res.content)
+    
+    return res.content
 
-if __name__ == '__main__':
-    asyncio.run(main())
+# if __name__ == '__main__':
+#     asyncio.run(main())
 
