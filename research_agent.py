@@ -126,13 +126,13 @@ async def research(user_input):
         [
             (
                 "system",
-                "You are an expert research assistant that prepares a comprehensive and brief report on a topic and the {context} provided."
+                "You are an expert research assistant that prepares a comprehensive and brief report on a topic and the {context} provided. Provide all the facts and figures in the report."
             ),
             ("human", "{input}")
         ]
     )
     chain = prompt | llm
-    res = await chain.ainvoke(
+    res = chain.invoke(
         {
             "context": documents,
             "input": user_input,
