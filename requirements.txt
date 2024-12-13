@@ -1,0 +1,5 @@
+googlesearch-python
+pymupdf
+google-generativeai
+python-dotenv
+langchain-google-genai
