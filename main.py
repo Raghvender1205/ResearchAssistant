@@ -16,21 +16,18 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Accept user input
+
 if prompt := st.chat_input("Ask anything..."):
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
-    # Display user message in chat message container
-    with st.chat_message("user"):
+
+    with st.chat_message("user", avatar="👨‍💻"):
         st.markdown(prompt)
     
     with st.spinner('Processing your request...'):
         bot_response = run_research(prompt)
-        
-        # Add bot message to chat history
+
         st.session_state.messages.append({"role": "bot", "content": bot_response})
 
         # Display bot message in chat message container
-        with st.chat_message("bot"):
+        with st.chat_message("bot", avatar="👩‍💻"):
             st.markdown(bot_response)
